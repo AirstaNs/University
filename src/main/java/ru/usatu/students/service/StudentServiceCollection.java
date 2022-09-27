@@ -8,7 +8,7 @@ import java.util.List;
 import java.util.stream.IntStream;
 
 @Service
-public class StudentServiceCollection {
+public class StudentServiceCollection implements StudentService{
     private List<Student> students = new ArrayList<>();
 
     public StudentServiceCollection() {
@@ -27,7 +27,6 @@ public class StudentServiceCollection {
 //                return student;
 //        }
 //        return new Student();
-//
         return students.stream().filter(student -> student.getId() == id).findFirst().orElse(new Student());
     }
 

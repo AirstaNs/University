@@ -3,7 +3,9 @@ package ru.usatu.students.controller;
 import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.*;
 import ru.usatu.students.model.Student;
-import ru.usatu.students.service.StudentServiceCollection;
+import ru.usatu.students.service.StudentService;
+
+//import ru.usatu.students.service.StudentServiceCollection;
 
 import java.util.List;
 
@@ -11,11 +13,11 @@ import java.util.List;
 @RequestMapping("/students")
 public class StudentController {
 
-    private StudentServiceCollection studentService;
+    //private StudentServiceCollection studentService;
+    private StudentService studentService;
 
-    public StudentController(StudentServiceCollection studentService) {
-        this.studentService = studentService;
-    }
+   //public StudentController(StudentServiceCollection studentService) {this.studentService = studentService;}
+   public StudentController(StudentService studentService) {this.studentService = studentService;}
 
     @GetMapping
     public @ResponseBody
