@@ -21,30 +21,50 @@ public class StudentController {
     @GetMapping
     public @ResponseBody
     List<Student> getStudents() {
-        return studentService.getStudents();
+        try {
+            return studentService.getStudents();
+        } catch (Exception e) {
+            throw new RuntimeException(e);
+        }
     }
 
     @GetMapping("/{id}")
     public @ResponseBody
     Student getStudents(@PathVariable int id) {
-        return studentService.getStudents(id);
+        try {
+            return studentService.getStudents(id);
+        } catch (Exception e) {
+            throw new RuntimeException(e);
+        }
     }
 
     @PostMapping
     public @ResponseBody
     Student addStudent(@RequestBody Student student) {
-        return studentService.addStudent(student);
+        try {
+            return studentService.addStudent(student);
+        } catch (Exception e) {
+            throw new RuntimeException(e);
+        }
     }
 
     @PutMapping("/{id}")
     public @ResponseBody
-    Student editStudent(@PathVariable int id, @RequestBody String surname, @RequestBody String name, @RequestBody String patronymic, @RequestBody String number, @RequestBody String phone) {
-        return studentService.editStudent(id, surname, name, patronymic, number, phone);
+    Student editStudent(@PathVariable int id, @RequestBody String surname, @RequestBody String name, @RequestBody String patronymic, @RequestBody String number,@RequestBody String phone) {
+        try {
+            return studentService.editStudent(id, surname, name, patronymic, number, phone);
+        } catch (Exception e) {
+            throw new RuntimeException(e);
+        }
     }
 
     @DeleteMapping("/{id}")
     @ResponseStatus(HttpStatus.OK)
     public void deleteStudent(@PathVariable int id) {
-        studentService.deleteStudent(id);
+        try {
+            studentService.deleteStudent(id);
+        } catch (Exception e) {
+            throw new RuntimeException(e);
+        }
     }
 }

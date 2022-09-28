@@ -1,7 +1,35 @@
 <?xml version="1.0" encoding="UTF-8" standalone = "yes"?>
 <students>
-    <studen>
+    <student>
         <id>1</id>>
-        <name>Баландина Ольга Андреевна</name>>
-    </studen>
+        <surname>Баландина</surname>
+        <name>Ольга</name>>
+        <patronymic>Андреевна</patronymic>
+        <number>111</number>
+        <phone>89374786563</phone>>
+    </student>
+    <student>
+        <id>2</id>>
+        <surname>Байбурин</surname>
+        <name>Марат</name>>
+        <patronymic>Рашидович</patronymic>
+        <number>222</number>
+        <phone>8800553535</phone>>
+    </student>
+    <student>
+        <id>3</id>>
+        <surname>Злыгостев</surname>
+        <name>Артем</name>>
+        <patronymic>Андреевич</patronymic>
+        <number>333</number>
+        <phone>89374788888</phone>>
+    </student>
+    <student>
+        <id>4</id>>
+        <surname>Гареева</surname>
+        <name>Диана</name>>
+        <patronymic>Радиковна</patronymic>
+        <number>444</number>
+        <phone>89374786555</phone>>
+    </student>
 </students>

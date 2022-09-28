@@ -7,9 +7,8 @@ import java.util.ArrayList;
 import java.util.List;
 //import java.util.stream.IntStream;
 
-@Service
 public class StudentServiceCollection implements StudentService{
-    private List<Student> students = new ArrayList<>();
+   private List<Student> students = new ArrayList<>();
 
     public StudentServiceCollection() {
         String std = "student";

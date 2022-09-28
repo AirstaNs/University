@@ -1,11 +1,22 @@
 package ru.usatu.students.model;
 
+import javax.xml.bind.annotation.XmlAccessType;
+import javax.xml.bind.annotation.XmlAccessorType;
+import javax.xml.bind.annotation.XmlElement;
+
+@XmlAccessorType(XmlAccessType.FIELD)
 public class Student {
+    @XmlElement(name = "id")
     private int id;
+    @XmlElement(name = "surname")
     private String surname;
+    @XmlElement(name = "name")
     private String name;
+    @XmlElement(name = "patronymic")
     private String patronymic;
+    @XmlElement(name = "number")
     private String number;
+    @XmlElement(name = "phone")
     private String phone;
 
     public Student(){}
