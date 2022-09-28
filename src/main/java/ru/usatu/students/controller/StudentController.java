@@ -6,7 +6,6 @@ import ru.usatu.students.model.Student;
 import ru.usatu.students.service.StudentService;
 
 //import ru.usatu.students.service.StudentServiceCollection;
-
 import java.util.List;
 
 @RestController
@@ -39,8 +38,8 @@ public class StudentController {
 
     @PutMapping("/{id}")
     public @ResponseBody
-    Student editStudent(@PathVariable int id, @RequestBody String name) {
-        return studentService.editStudent(id, name);
+    Student editStudent(@PathVariable int id, @RequestBody String surname, @RequestBody String name, @RequestBody String patronymic, @RequestBody String number, @RequestBody String phone) {
+        return studentService.editStudent(id, surname, name, patronymic, number, phone);
     }
 
     @DeleteMapping("/{id}")

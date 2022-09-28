@@ -11,8 +11,9 @@ public interface StudentService {
 
     void deleteStudent(int id);
 
-    Student editStudent(int id, String name);
+    Student editStudent(int id, String surname, String name, String patronymic, String number, String phone);
 
     Student addStudent(Student student);
+
 }
 
