@@ -50,7 +50,7 @@ public class StudentController {
 
     @PutMapping("/{id}")
     public @ResponseBody
-    Student editStudent(@PathVariable int id, @RequestBody String surname, @RequestBody String name, @RequestBody String patronymic, @RequestBody String number,@RequestBody String phone) {
+    Student editStudent(@PathVariable int id, @RequestBody String surname, String name, String patronymic, String number, String phone) {
         try {
             return studentService.editStudent(id, surname, name, patronymic, number, phone);
         } catch (Exception e) {

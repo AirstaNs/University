@@ -6,7 +6,7 @@ import javax.xml.bind.annotation.XmlElement;
 import javax.xml.bind.annotation.XmlRootElement;
 import java.util.List;
 
-@XmlRootElement(name = "students")
+@XmlRootElement(name = "students") // элемент самого верхнего уровня, все остальные элементы лежат в нем
 @XmlAccessorType(XmlAccessType.FIELD)
 public class StudentList {
 
