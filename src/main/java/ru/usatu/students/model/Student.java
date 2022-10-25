@@ -1,16 +1,24 @@
 package ru.usatu.students.model;
 
+import org.springframework.boot.autoconfigure.domain.EntityScan;
+
+import javax.persistence.*;
+
 import javax.xml.bind.annotation.XmlAccessType;
 import javax.xml.bind.annotation.XmlAccessorType;
 import javax.xml.bind.annotation.XmlElement;
 
 @XmlAccessorType(XmlAccessType.FIELD)
+@Entity
+@Table(name = "STUDENT")
 public class Student {
     @XmlElement(name = "id")
+    @Id
     private int id;
     @XmlElement(name = "surname")
     private String surname;
     @XmlElement(name = "name")
+    @Column(name= "name")
     private String name;
     @XmlElement(name = "patronymic")
     private String patronymic;
@@ -22,6 +30,7 @@ public class Student {
     public Student(){}
 
     public Student(int id, String surname, String name, String patronymic, String number, String phone){
+
         this.id = id;
         this.surname = surname;
         this.name = name;
@@ -45,7 +54,7 @@ public class Student {
     public void setPatronymic(String patronymic) {this.patronymic = patronymic; }
 
     public void setPhone(String phone) {this.phone = phone; }
-
+    @Id
     public void setId(int id) {this.id = id;}
 
     public String getName() {
