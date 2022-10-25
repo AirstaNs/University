@@ -10,7 +10,6 @@ import javax.xml.bind.Unmarshaller;
 import java.io.File;
 import java.util.List;
 
-@Service
 public class StudentServiceXML implements StudentService{
 
     String path = new File("").getAbsolutePath();

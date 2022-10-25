@@ -8,23 +8,27 @@ import javax.xml.bind.annotation.XmlAccessType;
 import javax.xml.bind.annotation.XmlAccessorType;
 import javax.xml.bind.annotation.XmlElement;
 
-@XmlAccessorType(XmlAccessType.FIELD)
 @Entity
-@Table(name = "STUDENT")
+@Table(name = "students")
+@XmlAccessorType(XmlAccessType.FIELD)
 public class Student {
     @XmlElement(name = "id")
     @Id
     private int id;
     @XmlElement(name = "surname")
+    @Column(name= "surname")
     private String surname;
     @XmlElement(name = "name")
     @Column(name= "name")
     private String name;
     @XmlElement(name = "patronymic")
+    @Column(name= "patronymic")
     private String patronymic;
     @XmlElement(name = "number")
+    @Column(name= "number")
     private String number;
     @XmlElement(name = "phone")
+    @Column(name= "phone")
     private String phone;
 
     public Student(){}
@@ -54,8 +58,9 @@ public class Student {
     public void setPatronymic(String patronymic) {this.patronymic = patronymic; }
 
     public void setPhone(String phone) {this.phone = phone; }
-    @Id
-    public void setId(int id) {this.id = id;}
+
+//    @Id
+//    public void setId(int id) {this.id = id;}
 
     public String getName() {
         return name;
