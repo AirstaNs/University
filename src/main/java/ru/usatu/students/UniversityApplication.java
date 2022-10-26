@@ -19,7 +19,7 @@ public class UniversityApplication {
 //        }catch(Exception ignore){
 //
 //        }finally {
-            Thread.sleep(4436436346L);
+         //   Thread.sleep(4436436346L);
             SpringApplication.run(UniversityApplication.class, args);
 //        }
     }
