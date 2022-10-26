@@ -4,9 +4,11 @@ import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.data.domain.Sort;
 import org.springframework.data.jpa.repository.JpaRepository;
+import org.springframework.stereotype.Repository;
 import ru.usatu.students.model.Student;
 import java.util.Optional;
 
+@Repository
 public interface StudentRepository extends JpaRepository <Student, Integer> {
 
     interface CrudRepository<T, ID> extends Repository<T, ID> {
