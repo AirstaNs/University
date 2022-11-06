@@ -21,7 +21,7 @@ public class StudentServiceXML implements StudentService{
     }
 
     @Override
-    public Student getStudents(int id) throws Exception {
+    public Student getStudent (int id) throws Exception {
         return getStudents().stream().filter(student -> student.getId() == id)
                 .findFirst().orElse(new Student());
     }

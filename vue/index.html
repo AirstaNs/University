@@ -23,20 +23,23 @@
     <script>
         const studentsComponent = {
             template: `
-    <div v-if="loading">loading...</div>
-  <div class="container" v-else>
-    <div class="table">
-      <div class="caption">
+        <div v-if="loading">loading...</div>
+        <div class="container" v-else>
+        <div class="table">
+        <div class="caption">
+
         <h1>Список студентов</h1>
       </div>
       <table>
         <thead>
           <tr class="students-header">
             <th></th>
-            <th>Номер студента</th>
+            <th>ID студента</th>
             <th>Фамилия</th>
             <th>Имя</th>
             <th>Отчество</th>
+            <th>Номер зачетки</th>
+            <th>Номер телефона</th>
           </tr>
         </thead>
         <tbody>
@@ -46,6 +49,8 @@
             <td>{{ student.surname || "-" }}</td>
             <td>{{ student.name || "-" }}</td>
             <td>{{ student.patronymic || "-" }}</td>
+            <td>{{ student.number || "-" }}</td>
+            <td>{{ student.phone || "-" }}</td>
           </tr>
         </tbody>
       </table>
@@ -90,13 +95,14 @@
         const addStudentComponent = {
             template: `
             <div class="container">
-        <div class="add-form">
+            <div class="add-form">
             <div class="title caption">
+
                 <h1>Форма добавления студента</h1>
             </div>
             <section>
                 <div class='input-box'>
-                    <div>Номер студента</div>
+                    <div>ID студента</div>
                     <input type="text" v-model="student.id" placeholder="Номер студента">
                 </div>
                 <div class='input-box'>
@@ -166,10 +172,11 @@
         };
         const updateStudentComponent = {
             template: `
-    <div v-if="loading">loading...</div>
-  <div class="container" v-else>
-    <div class="add-form">
-      <div class="title caption">
+            <div v-if="loading">loading...</div>
+            <div class="container" v-else>
+            <div class="add-form">
+            <div class="title caption">
+
         <h1>Форма изменения студента</h1>
       </div>
       <section>
@@ -178,9 +185,11 @@
           <th>{{ student.name }}</th>
           <th>{{ student.surname }}</th>
           <th>{{ student.patronymic }}</th>
+          <td>{{ student.number || "-" }}</td>
+          <td>{{ student.phone || "-" }}</td>
         </tr>
         <div class='input-box'>
-          <div>Номер студента</div>
+          <div>ID студента</div>
           <input type="text" v-model="newStudent.id" placeholder="Номер студента">
         </div>
         <div class='input-box'>
@@ -280,5 +289,4 @@
 
     </script>
 </body>
-
 </html>

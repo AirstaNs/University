@@ -1,11 +1,7 @@
 package ru.usatu.students.service;
-
-import org.springframework.stereotype.Service;
 import ru.usatu.students.model.Student;
-
 import java.util.ArrayList;
 import java.util.List;
-//import java.util.stream.IntStream;
 
 public class StudentServiceCollection implements StudentService{
    private List<Student> students = new ArrayList<>();
@@ -20,21 +16,13 @@ public class StudentServiceCollection implements StudentService{
                                  "20130491", "89374444444"));
         students.add(new Student(4, "Гареева", "Диана", "Радиковна",
                                  "20130486", "89374786555"));
-
-        // final List<String> group2 = List.of("Баландина О.А.", "Байбурин М.Р.", "Злыгостев А.А.", "Гареева Д.Р.");
-        // final List<String> numbers = List.of("20130490", "20130834", "20130491", "20130486");
-        //  IntStream.range(0, group2.size()).forEach(i -> students.add(new Student(i + 1, group2.get(i), numbers.get(i))));
     }
 
     public List<Student> getStudents() {
         return students;
     }
 
-    public Student getStudents(int id) {
-//        for (var student : students) {
-//            if (student.getId() == id)
-//                return student;}
-//        return new Student();
+    public Student getStudent (int id) {
         return students.stream().filter(student -> student.getId() == id).findFirst().orElse(new Student());
     }
 
@@ -44,12 +32,6 @@ public class StudentServiceCollection implements StudentService{
     }
 
     public Student editStudent(int id, String surname, String name, String patronymic, String number, String phone) {
-//        for (var student : students) {
-//            if (student.getId() == id) {
-//                student.setName(name);
-//                return student;
-//            }}
-//        return new Student();
         return students.stream().filter(student -> student.getId() == id).findFirst().map(student -> {
             student.setSurName(surname);
             student.setName(name);
@@ -62,7 +44,6 @@ public class StudentServiceCollection implements StudentService{
 
     public void deleteStudent(int id) {
         students.removeIf(student -> student.getId() == id);
-        // students = students.stream().filter(student -> student.getId()!=id).collect(Collectors.toList());
     }
 
     public static void main(String[] args) {

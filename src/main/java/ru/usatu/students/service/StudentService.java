@@ -7,7 +7,7 @@ import java.util.List;
 @Component
 public interface StudentService {
 
-    Student getStudents(int id) throws Exception;
+    Student getStudent(int id) throws Exception;
 
     List<Student> getStudents() throws Exception;
 
