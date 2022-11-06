@@ -11,67 +11,30 @@ html,
 body {
     margin: 0;
     padding: 0;
+}
+
+html {
+    height: 100vh;
+}
+
+body,
+#app {
     min-height: 100vh;
 }
 
-body {
-    display: grid;
-    grid-template-rows: min-content 1fr min-content;
-    background: linear-gradient(
-            0deg,
-            rgba(77, 61, 255, 1) 0%,
-            rgba(0, 212, 255, 1) 100%
-        )
-        no-repeat;
-}
-
-/* Шапка сайта */
-
-header {
-    position: sticky;
-
-    display: grid;
+#app {
+    display: flex;
+    flex-direction: column;
     align-items: center;
-    justify-items: center;
-    grid-template-columns: 1fr 5fr 1fr;
-    width: 100%;
-    gap: 10px;
-
-    padding: 1rem;
-
-    color: #fff;
-}
-
-header h1,
-h2 {
-    margin: 0;
-}
-
-.titles {
-    grid-column-start: 2;
-}
-
-header img {
-    width: 60px;
-    height: 60px;
-}
-
-@media (max-width: 600px) {
-    .subtitle {
-        display: none;
-    }
+    background: linear-gradient(0deg,
+            rgba(77, 61, 255, 1) 0%,
+            rgba(0, 212, 255, 1) 100%) no-repeat;
 }
 
 /* Главная часть сайта */
 
-main {
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    width: 100%;
-}
-
 .container {
+    margin-top: 20px;
     display: flex;
     flex-direction: column;
     background-color: #fff;
@@ -81,6 +44,14 @@ main {
     padding: 2rem 5rem;
     border-radius: 14px;
     gap: 2rem;
+}
+
+.students-table {
+    text-align: left;
+}
+
+.students-header th {
+    text-align: left;
 }
 
 /* Поля ввода */
@@ -97,7 +68,8 @@ main {
     grid-template-columns: 1fr;
 }
 
-.input-box input, select {
+.input-box input,
+select {
     width: 100%;
     border-radius: 5px;
     border: 1px #252525 solid;
@@ -107,8 +79,8 @@ main {
 /* Кнопки */
 
 .button-box {
-    display: grid;
-    grid-template-columns: repeat(2, 1fr);
+    display: flex;
+    justify-content: center;
     gap: 1rem;
 }
 
@@ -116,8 +88,12 @@ main {
     border-radius: 25px;
     border: 1px #252525 solid;
     padding: 0.5rem 1rem;
-background: linear-gradient(130deg, #03a9f4, #634beb);
-color: aliceblue;
+    background: linear-gradient(130deg, #03a9f4, #634beb);
+    color: aliceblue;
+}
+
+.button-box button:disabled {
+    filter: brightness(.6);
 }
 
 /* Радио кнопки */
@@ -125,40 +101,5 @@ color: aliceblue;
 .radio {
     display: grid;
     align-items: center;
-    grid-template-columns: 30px  20px;
-}
-
-@media (max-width: 600px) {
-    .login {
-        padding: 1rem;
-        margin: 1rem;
-        width: 100%;
-    }
-
-    .button-box {
-        grid-template-columns: 1fr;
-    }
-
-    .title {
-        text-align: center;
-    }
-}
-
-/* Подвал сайта */
-
-footer {
-    padding: 1rem;
-    text-align: center;
-}
-
-footer a {
-    transition: .2s;
-    text-decoration: none;
-    color: #fff;
-    opacity: 0.6;
-}
-
-footer a:hover {
-    text-decoration: underline;
-    opacity: 1;
+    grid-template-columns: 30px 20px;
 }

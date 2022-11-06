@@ -20,82 +20,127 @@
         <router-view></router-view>
     </div>
 
-    <script type="module">
+    <script>
         const studentsComponent = {
-            template: `<div v-if="loading">loading...</div>
-    <div v-else>
-        <div class="table">
-            <div class="caption">
-                <h1>Список студентов</h1>
-            </div>
-            <div class="header">
-                <div class="header-item h-1">Номер студента</div>
-                <div class="header-item h-1">Фамилия Имя Очество</div>
-            </div>
-            <div class="row" v-for="student in students">
-                <div class="row-item r-1">
-                    {{ student.id }}
-                </div>
-                <div class="row-item r-2">
-                    {{ student.name }}
-                </div>
-            </div>
-            <div>
-                <button class="button" v-on:click="addStudent">Добавить</button>
-            </div>
-        </div>
-    </div>`,
+            template: `
+    <div v-if="loading">loading...</div>
+  <div class="container" v-else>
+    <div class="table">
+      <div class="caption">
+        <h1>Список студентов</h1>
+      </div>
+      <table>
+        <thead>
+          <tr class="students-header">
+            <th></th>
+            <th>Номер студента</th>
+            <th>Фамилия</th>
+            <th>Имя</th>
+            <th>Отчество</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr class="students-table" v-for="student in students">
+            <td><input type="radio" name="drone" v-model="currentStudent" :value="student.id"></td>
+            <td>{{ student.id }}</td>
+            <td>{{ student.surname || "-" }}</td>
+            <td>{{ student.name || "-" }}</td>
+            <td>{{ student.patronymic || "-" }}</td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+    <div class="button-box">
+      <button class="button" v-on:click="addStudent">Добавить</button>
+      <button class="button" v-on:click="delStudent" :disabled="!currentStudent">Удалить</button>
+      <button class="button" v-on:click="updateStudent" :disabled="!currentStudent">Изменить</button>
+    </div>
+  </div>
+            `,
             data() {
                 return {
-                    loading:true,
+                    loading: true,
+                    currentStudent: "",
                     students: null
                 }
             },
             methods: {
                 addStudent: function (event) {
                     this.$router.push('/addStudent');
+                },
+                updateStudent: function () {
+                    this.$router.push(`/updateStudent/${this.currentStudent}`);
+                },
+                delStudent: function () {
+                    if (!this.currentStudent) return
+                    axios
+                        .delete(`http://localhost:8080/students/${this.currentStudent}`, { mode: 'no-cors' })
+                        .then(responce => (this.students = responce.data))
+                        .finally(() => this.loading = false)
                 }
             },
-            mounted(){
+            mounted() {
                 axios
-                .get('http://localhost:8080/students', {mode: 'no-cors'})
-                .then(responce => (this.students = responce.data))
-                .finally(() => this.loading = false)
+                    .get('http://localhost:8080/students', { mode: 'no-cors' })
+                    .then(responce => (this.students = responce.data))
+                    .finally(() => this.loading = false)
             }
 
         };
         const addStudentComponent = {
-            template: `<main><div class="container">
+            template: `
+            <div class="container">
         <div class="add-form">
             <div class="title caption">
                 <h1>Форма добавления студента</h1>
             </div>
             <section>
                 <div class='input-box'>
-                    <div>
-                        <input type="text" v-model="student.id" placeholder="Номер студента">
-                    </div>
-                    <div>
-                        <input type="text" v-model="student.name" placeholder="Имя студента">
-                    </div>
+                    <div>Номер студента</div>
+                    <input type="text" v-model="student.id" placeholder="Номер студента">
+                </div>
+                <div class='input-box'>
+                    <div>Имя студента</div>
+                    <input type="text" v-model="student.name" placeholder="Имя студента">
+                </div>
+                <div class='input-box'>
+                    <div>Фамилия студента</div>
+                    <input type="text" v-model="student.surname" placeholder="Фамилия студента">
+                </div>
+                <div class='input-box'>
+                    <div>Отчество студента</div>
+                    <input type="text" v-model="student.patronymic" placeholder="Отчество студента">
+                </div>
+                <div class='input-box'>
+                    <div>Номер зачётки студента</div>
+                    <input type="text" v-model="student.number" placeholder="Номер зачётки студента">
+                </div>
+                <div class='input-box'>
+                    <div>Номер телефона студента</div>
+                    <input type="text" v-model="student.phone" placeholder="Номер телефона студента">
                 </div>
             </section>
         </div>
 
         <div class="button-container">
             <div class="button-box ">
-                
-                    <button class="button" v-on:click="addStudent">Сохранить</button>
-                    <button class="button" v-on:click="cancel">Отмена</button>
-                
+
+                <button class="button" v-on:click="addStudent">Сохранить</button>
+                <button class="button" v-on:click="cancel">Отмена</button>
+
             </div>
         </div>
-    </div></main>`,
-            data() {
+    </div>
+            `,
+                data() {
                 return {
                     student: {
                         id: null,
-                        name: null
+                        name: null,
+                        surname: null,
+                        patronymic: null,
+                        number: null,
+                        phone: null,
                     }
                 }
             },
@@ -119,18 +164,115 @@
                 }
             }
         };
+        const updateStudentComponent = {
+            template: `
+    <div v-if="loading">loading...</div>
+  <div class="container" v-else>
+    <div class="add-form">
+      <div class="title caption">
+        <h1>Форма изменения студента</h1>
+      </div>
+      <section>
+        <tr class="students-header">
+          <th>{{ student.id }}</th>
+          <th>{{ student.name }}</th>
+          <th>{{ student.surname }}</th>
+          <th>{{ student.patronymic }}</th>
+        </tr>
+        <div class='input-box'>
+          <div>Номер студента</div>
+          <input type="text" v-model="newStudent.id" placeholder="Номер студента">
+        </div>
+        <div class='input-box'>
+          <div>Имя студента</div>
+          <input type="text" v-model="newStudent.name" placeholder="Имя студента">
+        </div>
+        <div class='input-box'>
+          <div>Фамилия студента</div>
+          <input type="text" v-model="newStudent.surname" placeholder="Фамилия студента">
+        </div>
+        <div class='input-box'>
+          <div>Отчество студента</div>
+          <input type="text" v-model="newStudent.patronymic" placeholder="Отчество студента">
+        </div>
+        <div class='input-box'>
+          <div>Номер зачётки студента</div>
+          <input type="text" v-model="newStudent.number" placeholder="Номер зачётки студента">
+        </div>
+        <div class='input-box'>
+          <div>Номер телефона студента</div>
+          <input type="text" v-model="newStudent.phone" placeholder="Номер телефона студента">
+        </div>
+      </section>
+    </div>
+
+    <div class="button-container">
+      <div class="button-box ">
+
+        <button class="button" v-on:click="save">Сохранить</button>
+        <button class="button" v-on:click="cancel">Отмена</button>
+
+      </div>
+    </div>
+  </div>
+    `,
+            data() {
+                return {
+                    loading: true,
+                    student: {
+                        id: null,
+                        name: null,
+                        surname: null,
+                        patronymic: null,
+                        number: null,
+                        phone: null,
+                    },
+                    newStudent: {
+                        id: null,
+                        name: null
+                    }
+                }
+            },
+            methods: {
+                save: function () {
+                    axios
+                        .put(`http://localhost:8080/students/${this.$route.params.id}`,
+                            JSON.stringify(this.newStudent), {
+                            headers: { 'Content-Type': 'application/json; charset=utf-8' }
+                        })
+                        .then(response => {
+                            console.log("student updated");
+                            this.students = response.data
+                            this.$router.push('/students');
+                        })
+                        .catch(error => {
+                            alert(error);
+                        });
+                },
+                cancel: function (event) {
+                    this.$router.push('/students');
+                }
+            },
+            mounted() {
+                axios
+                    .get(`http://localhost:8080/students/${this.$route.params.id}`, { mode: 'no-cors' })
+                    .then(response => (this.student = response.data))
+                    .finally(() => this.loading = false)
+            }
+        };
 
         const routes = [
             { path: "/", component: studentsComponent },
             { path: '/students', component: studentsComponent },
-            { path: '/addStudent', component: addStudentComponent }
+            { path: '/addStudent', component: addStudentComponent },
+            { path: '/updateStudent/:id', component: updateStudentComponent },
         ]
+
         const router = new VueRouter.createRouter({
             history: VueRouter.createWebHashHistory(),
             routes
-        }
+        })
 
-        )
         const app = Vue.createApp({})
 
         app.use(router)
